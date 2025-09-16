@@ -1,5 +1,3 @@
-from django.db import models
-
 from odoo import models, fields
 
 class BakkerKoekenTags(models.Model):
@@ -8,6 +6,3 @@ class BakkerKoekenTags(models.Model):
 
     name = fields.Char(string="Tag naam", required=True)
     color = fields.Integer(string="Kleur")
-
-    def __str__(self):
-        return self.name
