@@ -28,7 +28,7 @@
         </record>
 
         <record id="tag_vers_gebakken" model="bakker_koeken_tags">
-            <field name="name">Vers gebakken</field>
+            <field name="name">Vers</field>
             <field name="color">6</field>
         </record>
 
@@ -43,13 +43,23 @@
         </record>
 
         <record id="tag_seizoen" model="bakker_koeken_tags">
-            <field name="name">Seizoensproduct</field>
+            <field name="name">Seizoen</field>
             <field name="color">9</field>
         </record>
 
         <record id="tag_populair" model="bakker_koeken_tags">
             <field name="name">Populair</field>
             <field name="color">10</field>
+        </record>
+
+        <record id="tag_krokant" model="bakker_koeken_tags">
+            <field name="name">Krokant</field>
+            <field name="color">11</field>
+        </record>
+
+        <record id="tag_zacht" model="bakker_koeken_tags">
+            <field name="name">Zacht</field>
+            <field name="color">0</field>
         </record>
     </data>
 </odoo>
