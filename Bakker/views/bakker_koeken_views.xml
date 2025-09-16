@@ -14,7 +14,7 @@
 
     <!-- Menu items -->
     <menuitem id="bakker_menu_root" name="Bakker" sequence="10">
-        <menuitem id="bakker_menu_koeken" name="Koeken" parent="bakker_menu_root" action="bakker_koeken_action"/>
+        <menuitem id="bakker_menu_koeken" name="Koeken"  action="bakker_koeken_action"/>
     </menuitem>
 
 
