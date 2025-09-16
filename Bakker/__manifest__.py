@@ -4,7 +4,7 @@
     "application": True,  # This line says the module is an App, and not a module
     "depends": ["base"],  # dependencies
     "data": [
-
+        "data/bakker_koeken_data.xml",
     ],
     "installable": True,
     'license': 'LGPL-3',
