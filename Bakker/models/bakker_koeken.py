@@ -1,9 +1,9 @@
-from odoo import models
+from odoo import models, fields
 
 class BakkerKoeken(models.Model):
     _name = "bakker_koeken"
     _description = "Bakker zijn lekkere koeken"
 
-    name_koek = models.Char(string="Naam van de koek", required=True)
-    prijs_koek = models.Float(string="Prijs van de koek", required=True)
-    voorraad_koek = models.Integer(string="Voorraad van de koek", required=True)
+    name_koek = fields.Char(string="Naam van de koek", required=True)
+    prijs_koek = fields.Float(string="Prijs van de koek", required=True)
+    voorraad_koek = fields.Integer(string="Voorraad van de koek", required=True)
