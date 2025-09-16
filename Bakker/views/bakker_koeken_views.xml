@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Search view  -->
+
+    <!-- search -->
     <record id="view_bakker_koeken_search" model="ir.ui.view">
         <field name="name">bakker.koeken.search</field>
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <search string="Bakker Koeken">
-                <field name="name_koek"/>
-                <field name="categorie_koek"/>
-                <filter string="Chocolade" name="filter_chocolade" domain="[('categorie_koek', '=', 'chocolade')]"/>
-                <filter string="Fruit" name="filter_fruit" domain="[('categorie_koek', '=', 'fruit')]"/>
-                <filter string="Noten" name="filter_noten" domain="[('categorie_koek', '=', 'noten')]"/>
-                <filter string="Speculaas" name="filter_speculaas" domain="[('categorie_koek', '=', 'speculaas')]"/>
-                <filter string="Pudding" name="filter_pudding" domain="[('pudding_koek', '=', True)]"/>
+                <field name="name_koek" />
+                <field name="categorie_koek" />
+                <filter string="Chocolade" domain="[('categorie_koek', '=', 'chocolade')]" />
+                <filter string="Fruit" domain="[('categorie_koek', '=', 'fruit')]" />
+                <filter string="Noten" domain="[('categorie_koek', '=', 'noten')]" />
+                <filter string="Speculaas" domain="[('categorie_koek', '=', 'speculaas')]" />
+                <filter string="Pudding" domain="[('pudding_koek', '=', True)]" />
             </search>
         </field>
     </record>
@@ -22,7 +23,7 @@
         <field name="name">Bakker Koeken</field>
         <field name="res_model">bakker_koeken</field>
         <field name="view_mode">list,form</field>
-        <field name="search_view_id" ref="view_bakker_koeken_search"/>
+        <field name="search_view_id" ref="view_bakker_koeken_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create the first Bakker Koeken
@@ -32,8 +33,9 @@
 
     <!-- Menu items -->
     <menuitem id="bakker_menu_root" name="Bakker" sequence="10">
-        <menuitem id="bakker_menu_koeken" name="Koeken" action="bakker_koeken_action"/>
+        <menuitem id="bakker_menu_koeken" name="Koeken" action="bakker_koeken_action" />
     </menuitem>
+
 
     <!-- List view -->
     <record id="view_bakker_koeken_list" model="ir.ui.view">
@@ -41,13 +43,14 @@
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <list string="Bakker Koeken">
-                <field name="name_koek"/>
-                <field name="prijs_koek"/>
-                <field name="voorraad_koek"/>
-                <field name="vervaldatum_koek"/>
-                <field name="categorie_koek"/>
-                <field name="pudding_koek"/>
-                <field name="totaal_inventarisatie"/>
+                <field name="name_koek" />
+                <field name="prijs_koek" />
+                <field name="voorraad_koek" />
+                <field name="aankoopdatum_koek" />
+                <field name="vervaldatum_koek" readonly="1" />
+                <field name="categorie_koek" />
+                <field name="pudding_koek" />
+                <field name="totaal_inventarisatie" readonly="1" />
             </list>
         </field>
     </record>
@@ -60,16 +63,18 @@
             <form string="Bakker Koeken">
                 <sheet>
                     <group>
-                        <field name="name_koek"/>
-                        <field name="prijs_koek"/>
-                        <field name="voorraad_koek"/>
-                        <field name="vervaldatum_koek"/>
-                        <field name="categorie_koek"/>
-                        <field name="pudding_koek"/>
-                        <field name="totaal_inventarisatie"/>
+                        <field name="name_koek" />
+                        <field name="prijs_koek" />
+                        <field name="voorraad_koek" />
+                        <field name="aankoopdatum_koek" />
+                        <field name="vervaldatum_koek" readonly="1" />
+                        <field name="categorie_koek" />
+                        <field name="pudding_koek" />
+                        <field name="totaal_inventarisatie" readonly="1" />
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
+
 </odoo>
