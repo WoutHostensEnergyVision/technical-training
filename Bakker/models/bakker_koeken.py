@@ -20,3 +20,8 @@ class BakkerKoeken(models.Model):
         required=True, help="Selecteer hier de categorie van de koek"
     )
     pudding_koek = fields.Boolean(string="Bevat pudding", default=False, help="Vink dit aan als de koek pudding bevat")
+    totaal_inventarisatie = fields.Float(string="Totale inventarisatie waarde", compute="_compute_totaal_inventarisatie", store=True, readonly=True)
+    
+    def _compute_totaal_inventarisatie(self):
+        for record in self:
+            record.totaal_inventarisatie = record.prijs_koek * record.voorraad_koek
