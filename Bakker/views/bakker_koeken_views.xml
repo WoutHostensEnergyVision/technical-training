@@ -51,6 +51,7 @@
                 <field name="categorie_koek"/>
                 <field name="pudding_koek"/>
                 <field name="totaal_inventarisatie"/>
+                <field name="tags_ids"/>
             </list>
         </field>
     </record>
@@ -71,6 +72,7 @@
                         <field name="categorie_koek"/>
                         <field name="pudding_koek"/>
                         <field name="totaal_inventarisatie"/>
+                        <field name="tags_ids"/>
                     </group>
                 </sheet>
             </form>

@@ -1,0 +1,29 @@
+<koekenTags>
+    <koek>
+        <id>1</id>
+        <naam>Chocoladekoek</naam>
+        <tags>
+            <tag>chocolade</tag>
+            <tag>zoet</tag>
+            <tag>dessert</tag>
+        </tags>
+    </koek>
+    <koek>
+        <id>2</id>
+        <naam>Appelkoek</naam>
+        <tags>
+            <tag>fruit</tag>
+            <tag>zoet</tag>
+            <tag>gebak</tag>
+        </tags>
+    </koek>
+    <koek>
+        <id>3</id>
+        <naam>Havermoutkoek</naam>
+        <tags>
+            <tag>gezond</tag>
+            <tag>vezels</tag>
+            <tag>ontbijt</tag>
+        </tags>
+    </koek>
+</koekenTags>
