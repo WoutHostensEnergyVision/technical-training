@@ -8,7 +8,7 @@ class BakkerKoeken(models.Model):
     name_koek = fields.Char(string="Naam van de koek", required=True, help="Vul hier de naam van de koek in")
     prijs_koek = fields.Float(string="Prijs van de koek", required=True, help="Vul hier de prijs van de koek in")
     voorraad_koek = fields.Integer(string="Voorraad van de koek", required=True , default=10)
-    vervaldatum_koek = fields.Date(string="Vervaldatum van de koek", required=True, help="Vul hier de vervaldatum van de koek in", default=fields.Date.today() + timedelta(days=30), readonly=True)
+    vervaldatum_koek = fields.Date(string="Vervaldatum van de koek", required=True, help="Vul hier de vervaldatum van de koek in", default=lambda self: fields.Date.today() + timedelta(days=30), readonly=True)
     aankoopdatum_koek = fields.Date(string="Aankoopdatum van de koek", default=fields.Date.today, help="Vul hier de aankoopdatum van de koek in", readonly=True)
     categorie_koek = fields.Selection(
         string="Categorie van de koek",
@@ -17,6 +17,7 @@ class BakkerKoeken(models.Model):
             ('fruit', 'Fruit'),
             ('noten', 'Noten'),
             ('speculaas', 'Speculaas'),
+            ('pudding', 'Pudding'),
         ],
         required=True, help="Selecteer hier de categorie van de koek"
     )
