@@ -23,6 +23,7 @@ class BakkerKoeken(models.Model):
     )
     pudding_koek = fields.Boolean(string="Bevat pudding", default=False, help="Vink dit aan als de koek pudding bevat")
     totaal_inventarisatie = fields.Float(string="Totale inventarisatie waarde", compute="_compute_totaal_inventarisatie", store=True, readonly=True)
+    tags_ids = fields.Many2many('bakker_koeken_tags', string="Tags", help="Selecteer hier de tags voor de koek")
     
     @api.depends('prijs_koek', 'voorraad_koek')
     def _compute_totaal_inventarisatie(self):
