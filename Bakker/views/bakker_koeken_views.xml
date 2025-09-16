@@ -27,9 +27,11 @@
                 <field name="name_koek"/>
                 <field name="prijs_koek"/>
                 <field name="voorraad_koek"/>
-                <field name="vervaldatum_koek"/>
+                <field name="aankoopdatum_koek"/>
+                <field name="vervaldatum_koek" readonly="1"/>
                 <field name="categorie_koek"/>
                 <field name="pudding_koek"/>
+                <field name="totaal_inventarisatie" readonly="1"/>
             </list>
         </field>
     </record>
@@ -45,9 +47,11 @@
                         <field name="name_koek"/>
                         <field name="prijs_koek"/>
                         <field name="voorraad_koek"/>
-                        <field name="vervaldatum_koek"/>
+                        <field name="aankoopdatum_koek"/>
+                        <field name="vervaldatum_koek" readonly="1"/>
                         <field name="categorie_koek"/>
                         <field name="pudding_koek"/>
+                        <field name="totaal_inventarisatie" readonly="1"/>
                     </group>
                 </sheet>
             </form>
