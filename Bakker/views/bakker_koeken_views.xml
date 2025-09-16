@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bakker_koeken_action" model="ir.actions.act_window">
+        <field name="name">Bakker Koeken</field>
+        <field name="res_model">bakker_koeken</field>
+        <field name="view_mode">list,form</field>
+        <field name="help">This action opens the Bakker Koeken model.</field>
+    </record>
+</odoo>

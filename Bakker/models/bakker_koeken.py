@@ -20,3 +20,6 @@ class BakkerKoeken(models.Model):
         required=True, help="Selecteer hier de categorie van de koek"
     )
     pudding_koek = fields.Boolean(string="Bevat pudding", default=False, help="Vink dit aan als de koek pudding bevat")
+    
+    
+
