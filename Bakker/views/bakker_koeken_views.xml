@@ -23,7 +23,7 @@
         <field name="name">bakker.koeken.list</field>
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
-            <list string="Bakker Koeken">
+            <list string="Bakker Koeken" create="true" edit="true" >
                 <field name="name_koek"/>
                 <field name="prijs_koek"/>
                 <field name="voorraad_koek"/>
