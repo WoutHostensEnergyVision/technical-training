@@ -1,15 +1,30 @@
 <?xml version="1.0"?>
 <odoo>
+    <!--Action-->
     <record id="bakker_koeken_action" model="ir.actions.act_window">
         <field name="name">Bakker Koeken</field>
         <field name="res_model">bakker_koeken</field>
-        <field name="view_mode">tree,form</field>  <!-- Wijzig "list" naar "tree" -->
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create the first Bakker Koeken
             </p>
         </field>
     </record>   
+    <!--Menu items-->
     <menuitem id="bakker_menu_root" name="Bakker"/>
     <menuitem id="bakker_menu_koeken" name="Koeken" parent="bakker_menu_root" action="bakker_koeken_action"/>
+
+    <!--List view-->
+    <record id="view_bakker_koeken_list" model="ir.ui.view">
+        <field name="name">bakker.koeken.tree</field>
+        <field name="model">bakker_koeken</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="price"/>
+            </list>
+        </field>
+    </record>
 </odoo>
