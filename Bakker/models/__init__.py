@@ -1,1 +1,1 @@
-from bakker_koeken import BakkerKoeken
+import . from bakker_koeken
