@@ -4,7 +4,7 @@
     <record id="bakker_koeken_action" model="ir.actions.act_window">
         <field name="name">Bakker Koeken</field>
         <field name="res_model">bakker_koeken</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create the first Bakker Koeken
@@ -13,19 +13,19 @@
     </record>
     <!-- Menu -->
     <menuitem id="menu_bakker_koeken" name="Koeken" sequence="10"/>
-    <!-- Tree view -->
-    <record id="view_bakker_koeken_tree" model="ir.ui.view">
-        <field name="name">bakker.koeken.tree</field>
+    <!-- List view -->
+    <record id="view_bakker_koeken_list" model="ir.ui.view">
+        <field name="name">bakker.koeken.list</field>
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
-            <tree string="Bakker Koeken">
+            <list string="Bakker Koeken">
                 <field name="name_koek"/>
                 <field name="prijs_koek"/>
                 <field name="voorraad_koek"/>
                 <field name="vervaldatum_koek"/>
                 <field name="categorie_koek"/>
                 <field name="pudding_koek"/>
-            </tree>
+            </list>
         </field>
     </record>
     <!-- Form view -->
