@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="menu_bakker_root" name="Bakker" sequence="10"/>
-    <menuitem id="menu_bakker_koeken" name="Koeken" parent="menu_bakker_root" sequence="10"/>
-    <menuitem id="menu_bakker_koeken_action" name="Bakker Koeken Action" parent="menu_bakker_koeken" sequence="10" action="bakker_koeken_action"/>
+    <menuitem id="menu_bakker_koeken" name="Koeken" sequence="10"/>
     <!-- Tree view -->
     <record id="view_bakker_koeken_tree" model="ir.ui.view">
         <field name="name">bakker.koeken.tree</field>
