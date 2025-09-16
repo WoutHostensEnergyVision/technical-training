@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
     <!-- Action -->
     <record id="bakker_koeken_action" model="ir.actions.act_window">
         <field name="name">Bakker Koeken</field>
@@ -17,7 +18,7 @@
     </menuitem>
     <!-- List view -->
     <record id="view_bakker_koeken_list" model="ir.ui.view">
-        <field name="name">bakker.koeken.tree</field>
+        <field name="name">bakker.koeken.list</field>
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <list string="Bakker Koeken">
@@ -49,5 +50,5 @@
             </form>
         </field>
     </record>
-
+    </data>
 </odoo>
