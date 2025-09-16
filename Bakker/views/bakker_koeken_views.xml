@@ -13,6 +13,7 @@
     </record>
     <!-- Menu -->
     <menuitem id="menu_bakker_koeken" name="Koeken" sequence="10"/>
+    <menuitem id="menu_bakker_koeken_action" name="Alle Koeken" parent="menu_bakker_koeken" action="bakker_koeken_action" sequence="10"/>
     <!-- List view -->
     <record id="view_bakker_koeken_list" model="ir.ui.view">
         <field name="name">bakker.koeken.list</field>
