@@ -13,6 +13,8 @@
                 <filter string="Noten" name="filter_noten" domain="[('categorie_koek', '=', 'noten')]"/>
                 <filter string="Speculaas" name="filter_speculaas" domain="[('categorie_koek', '=', 'speculaas')]"/>
                 <filter string="Pudding" name="filter_pudding" domain="[('pudding_koek', '=', True)]"/>
+                <filter string="Bijna op" name="filter_voorraad_laag" domain="[('voorraad_koek', '&lt;=', 10)]"/>
+                <filter string="vervald" name="filter_vervaldatum" domain="[('vervaldatum_koek', '&lt;', context_today())]"/>
             </search>
         </field>
     </record>
