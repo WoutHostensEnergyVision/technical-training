@@ -198,9 +198,20 @@ class BakkerKoeken(models.Model):
         if self.voorraad_koek <= 0:
             raise ValidationError("Geen voorraad beschikbaar!")
         
+        # Zoek of maak een standaard walk-in klant
+        walk_in_klant = self.env['res.partner'].search([('name', '=', 'Walk-in klant')], limit=1)
+        if not walk_in_klant:
+            walk_in_klant = self.env['res.partner'].create({
+                'name': 'Walk-in klant',
+                'is_company': False,
+                'customer_rank': 1,
+                'street': 'Bakkerij',
+                'email': 'walkin@bakkerij.local'
+            })
+        
         verkoop = self.env['bakker_verkoop'].create({
             'koek_id': self.id,
-            'klant_naam': 'Walk-in klant',
+            'partner_id': walk_in_klant.id,
             'aantal': 1,
             'prijs_per_stuk': self.prijs_koek,
             'betaal_methode': 'cash',
