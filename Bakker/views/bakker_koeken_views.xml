@@ -139,7 +139,9 @@
                             <div class="o_kanban_record_bottom">
                                 <div class="oe_kanban_bottom_left">
                                     <div class="o_kanban_inline_block">
-                                        <field name="verkoop_count" widget="priority"/>
+                                        <small class="text-muted">
+                                            📊 <field name="verkoop_count"/> verkopen
+                                        </small>
                                     </div>
                                 </div>
                                 <div class="oe_kanban_bottom_right">
