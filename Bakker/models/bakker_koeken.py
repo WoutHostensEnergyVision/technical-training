@@ -20,6 +20,10 @@ class BakkerKoeken(models.Model):
     def _onchange_prijs_koek(self):
         self._compute_totaal_inventarisatie()
     
+    @api.onchange('totaal_inventarisatie')
+    def _onchange_totaal_inventarisatie(self):
+        self._inverse_totaal_inventarisatie()
+    
     @api.depends('prijs_koek', 'voorraad_koek')
     def _compute_totaal_inventarisatie(self):
         for record in self:
