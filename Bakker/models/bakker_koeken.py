@@ -49,9 +49,10 @@ class BakkerKoeken(models.Model):
         for record in self:
             record.voorraad_koek += 20
             record.aankoopdatum_koek = fields.Date.today()
+            
         return {
             'type': 'ir.actions.client',
-            'tag': 'display_notification',
+            'tag': 'reload',
             'params': {
                 'title': 'Voorraad Bijgevuld!',
                 'message': f'Voorraad van {self.name_koek} is bijgevuld met 20 stuks',
