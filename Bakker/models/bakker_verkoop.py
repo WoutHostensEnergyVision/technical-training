@@ -140,6 +140,23 @@ class BakkerVerkoop(models.Model):
     def action_print_factuur(self):
         """Print factuur PDF"""
         return self.env.ref('Bakker.report_bakker_factuur').report_action(self)
+    
+    def action_open_print_wizard(self):
+        """Open standaard print wizard voor factuur"""
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Print Factuur',
+            'res_model': 'ir.actions.report',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_model': 'bakker_verkoop',
+                'default_ids': self.ids,
+                'active_ids': self.ids,
+                'active_model': 'bakker_verkoop',
+            },
+            'domain': [('model', '=', 'bakker_verkoop')],
+        }
 
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
