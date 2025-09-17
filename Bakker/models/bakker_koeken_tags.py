@@ -5,4 +5,4 @@ class BakkerKoekenTags(models.Model):
     _description = "Tags voor bakker koeken"
 
     name = fields.Char(string="Tag naam", required=True)
-    color = fields.Char(string="Kleur", default="#3498db")  # Voor hex kleuren
+    color = fields.Int(string="Kleur", default=1)
