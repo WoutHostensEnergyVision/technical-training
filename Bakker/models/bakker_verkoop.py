@@ -137,8 +137,14 @@ class BakkerVerkoop(models.Model):
         }
     
     def action_print_factuur(self):
-        """Print factuur PDF"""
-        return self.env.ref('Bakker.report_bakker_factuur').report_action(self)
+        """Open rapport wizard voor factuur PDF"""
+        return {
+            'type': 'ir.actions.report',
+            'report_name': 'Bakker.report_bakker_factuur_document',
+            'report_type': 'qweb-pdf',
+            'context': self.env.context,
+            'data': {'ids': self.ids},
+        }
 
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
