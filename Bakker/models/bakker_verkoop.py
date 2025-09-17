@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+import base64
 
 class BakkerVerkoop(models.Model):
     _name = "bakker_verkoop"
@@ -137,14 +138,18 @@ class BakkerVerkoop(models.Model):
         }
     
     def action_print_factuur(self):
-        """Open rapport preview"""
+        """Open factuur preview wizard"""
+        wizard = self.env['bakker.factuur.wizard'].create({
+            'verkoop_id': self.id,
+        })
+        
         return {
-            'type': 'ir.actions.report',
-            'report_name': 'Bakker.report_bakker_factuur_document',
-            'report_type': 'qweb-pdf',
-            'report_file': 'Bakker.report_bakker_factuur_document',
+            'type': 'ir.actions.act_window',
+            'name': 'Factuur Preview',
+            'res_model': 'bakker.factuur.wizard',
+            'res_id': wizard.id,
+            'view_mode': 'form',
             'target': 'new',
-            'context': {'active_ids': self.ids}
         }
 
 class BakkerVerkoopWizard(models.TransientModel):
@@ -227,4 +232,54 @@ class BakkerVerkoopWizard(models.TransientModel):
             'view_mode': 'form',
             'target': 'new',
             'context': {'default_is_company': False, 'default_customer_rank': 1}
+        }
+
+class BakkerFactuurWizard(models.TransientModel):
+    _name = 'bakker.factuur.wizard'
+    _description = 'Factuur Preview Wizard'
+    
+    verkoop_id = fields.Many2one('bakker_verkoop', string='Verkoop', required=True)
+    pdf_data = fields.Binary(string='PDF Data')
+    pdf_filename = fields.Char(string='Filename')
+    show_preview = fields.Boolean(string='Toon Preview', default=True)
+    
+    def action_preview_factuur(self):
+        """Genereer PDF preview"""
+        report = self.env.ref('Bakker.report_bakker_factuur')
+        pdf_content, _ = report._render_qweb_pdf([self.verkoop_id.id])
+        
+        self.pdf_data = base64.b64encode(pdf_content)
+        self.pdf_filename = f"Factuur_{self.verkoop_id.name}.pdf"
+        self.show_preview = True
+        
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Factuur Preview',
+            'res_model': 'bakker.factuur.wizard',
+            'res_id': self.id,
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'show_preview': True}
+        }
+    
+    def action_download_factuur(self):
+        """Download de PDF"""
+        if not self.pdf_data:
+            self.action_preview_factuur()
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content?model=bakker.factuur.wizard&id={self.id}&field=pdf_data&filename_field=pdf_filename&download=true',
+            'target': 'self',
+        }
+    
+    def action_print_factuur(self):
+        """Print de PDF via browser"""
+        if not self.pdf_data:
+            self.action_preview_factuur()
+        
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/web/content?model=bakker.factuur.wizard&id={self.id}&field=pdf_data&filename_field=pdf_filename',
+            'target': 'new',
         }
