@@ -75,18 +75,39 @@ class BakkerVerkoop(models.Model):
         }
     
     def action_markeer_betaald(self):
-        """Markeer als betaald"""
+        """Markeer als betaald en verstuur factuur email"""
         for record in self:
             if record.status != 'bevestigd':
                 raise ValidationError("Alleen bevestigde verkopen kunnen als betaald gemarkeerd worden.")
             record.status = 'betaald'
+            
+            # Verstuur factuur email als klant een email adres heeft
+            if record.partner_id.email:
+                try:
+                    # Zoek email template
+                    template = self.env.ref('Bakker.email_template_bakker_factuur', raise_if_not_found=False)
+                    if template:
+                        # Verstuur email
+                        template.send_mail(record.id, force_send=True)
+                        
+                        # Log activiteit
+                        record.message_post(
+                            body=f"Factuur email verstuurd naar {record.partner_id.email}",
+                            subject="Factuur Email Verstuurd"
+                        )
+                except Exception as e:
+                    # Log fout maar stop proces niet
+                    record.message_post(
+                        body=f"Fout bij versturen email: {str(e)}",
+                        subject="Email Fout"
+                    )
         
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',
             'params': {
                 'title': '💰 Betaling Ontvangen!',
-                'message': f'Verkoop {self.name} is gemarkeerd als betaald',
+                'message': f'Verkoop {self.name} is gemarkeerd als betaald' + (f' en factuur is verstuurd naar {self.partner_id.email}' if self.partner_id.email else ''),
                 'type': 'success',
             }
         }
