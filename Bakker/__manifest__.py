@@ -13,6 +13,7 @@
         "views/bakker_koeken_tags_views.xml",
         "views/bakker_koeken_views.xml",
         "views/bakker_verkoop_views.xml",
+        "reports/bakker_factuur_report.xml",
     ],
     "installable": True,
     'license': 'LGPL-3',
