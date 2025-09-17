@@ -4,9 +4,12 @@
     "application": True,  # This line says the module is an App, and not a module
     "depends": ["base"],  # dependencies
     "data": [
+        "data/bakker_koeken_categorie_data.xml",
         "data/bakker_koeken_tags_data.xml",
         "data/bakker_koeken_data.xml",
         "security/ir.model.access.csv",
+        "views/bakker_koeken_categorie_views.xml",
+        "views/bakker_koeken_tags_views.xml",
         "views/bakker_koeken_views.xml",
     ],
     "installable": True,

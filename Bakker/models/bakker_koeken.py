@@ -10,17 +10,7 @@ class BakkerKoeken(models.Model):
     voorraad_koek = fields.Integer(string="Voorraad van de koek", required=True , default=10)
     vervaldatum_koek = fields.Date(string="Vervaldatum van de koek", required=True, help="Vul hier de vervaldatum van de koek in", default=lambda self: fields.Date.today() + timedelta(days=30), readonly=True)
     aankoopdatum_koek = fields.Date(string="Aankoopdatum van de koek", default=fields.Date.today, help="Vul hier de aankoopdatum van de koek in", readonly=True)
-    categorie_koek = fields.Selection(
-        string="Categorie van de koek",
-        selection=[
-            ('chocolade', 'Chocolade'),
-            ('fruit', 'Fruit'),
-            ('noten', 'Noten'),
-            ('speculaas', 'Speculaas'),
-            ('pudding', 'Pudding'),
-        ],
-        required=True, help="Selecteer hier de categorie van de koek"
-    )
+    categorie_koek_id = fields.Many2one('bakker_koeken_categorie', string="Categorie van de koek", required=True, help="Selecteer hier de categorie van de koek")
     pudding_koek = fields.Boolean(string="Bevat pudding", default=False, help="Vink dit aan als de koek pudding bevat")
     totaal_inventarisatie = fields.Float(string="Totale inventarisatie waarde", compute="_compute_totaal_inventarisatie", store=True, readonly=True)
     tags_ids = fields.Many2many('bakker_koeken_tags', string="Tags", help="Selecteer hier de tags voor de koek")

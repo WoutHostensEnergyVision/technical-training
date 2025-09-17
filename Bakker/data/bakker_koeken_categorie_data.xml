@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Categorieën voor koeken -->
+        <record id="categorie_chocolade" model="bakker_koeken_categorie">
+            <field name="name">Chocolade</field>
+            <field name="beschrijving">Koeken met chocolade</field>
+        </record>
+
+        <record id="categorie_fruit" model="bakker_koeken_categorie">
+            <field name="name">Fruit</field>
+            <field name="beschrijving">Koeken met fruit</field>
+        </record>
+
+        <record id="categorie_noten" model="bakker_koeken_categorie">
+            <field name="name">Noten</field>
+            <field name="beschrijving">Koeken met noten</field>
+        </record>
+
+        <record id="categorie_speculaas" model="bakker_koeken_categorie">
+            <field name="name">Speculaas</field>
+            <field name="beschrijving">Speculaas koeken</field>
+        </record>
+
+        <record id="categorie_pudding" model="bakker_koeken_categorie">
+            <field name="name">Pudding</field>
+            <field name="beschrijving">Koeken met pudding</field>
+        </record>
+    </data>
+</odoo>
