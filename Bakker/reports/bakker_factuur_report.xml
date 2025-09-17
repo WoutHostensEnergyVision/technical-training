@@ -23,84 +23,84 @@
                     <t t-call="web.external_layout">
                         <div class="page">
                             <!-- Header met bakkerij info -->
-                            <div class="row" style="background-color: #8B4513; color: white; padding: 20px; margin-bottom: 30px;">
+                            <div class="row mb-4">
                                 <div class="col-6">
-                                    <h1 style="margin: 0; font-size: 28px;">🍪 Bakkerij Factuur</h1>
-                                    <p style="margin: 5px 0;">Vers gebakken, elke dag!</p>
+                                    <h1 class="text-primary" style="font-size: 28px;">🍪 Bakkerij Factuur</h1>
+                                    <p class="text-muted">Vers gebakken, elke dag!</p>
                                 </div>
                                 <div class="col-6 text-right">
-                                    <h2 style="margin: 0; color: white;">
+                                    <h2 class="text-primary">
                                         <span t-field="doc.name"/>
                                     </h2>
-                                    <p style="margin: 5px 0;">
+                                    <p class="text-muted">
                                         Datum: <span t-field="doc.verkoop_datum" t-options="{'widget': 'datetime', 'format': 'dd/MM/yyyy HH:mm'}"/>
                                     </p>
                                 </div>
                             </div>
 
                             <!-- Klant informatie -->
-                            <div class="row" style="margin-bottom: 30px;">
+                            <div class="row mb-4">
                                 <div class="col-6">
-                                    <h4 style="color: #8B4513; border-bottom: 2px solid #8B4513; padding-bottom: 5px;">Factuur aan:</h4>
-                                    <p style="margin: 5px 0;"><strong><span t-field="doc.partner_id.name"/></strong></p>
-                                    <p style="margin: 2px 0;" t-if="doc.partner_id.street"><span t-field="doc.partner_id.street"/></p>
-                                    <p style="margin: 2px 0;" t-if="doc.partner_id.city">
+                                    <h4 class="text-primary border-bottom pb-2">Factuur aan:</h4>
+                                    <p><strong><span t-field="doc.partner_id.name"/></strong></p>
+                                    <p t-if="doc.partner_id.street"><span t-field="doc.partner_id.street"/></p>
+                                    <p t-if="doc.partner_id.city">
                                         <span t-field="doc.partner_id.zip"/> <span t-field="doc.partner_id.city"/>
                                     </p>
-                                    <p style="margin: 2px 0;" t-if="doc.partner_id.country_id">
+                                    <p t-if="doc.partner_id.country_id">
                                         <span t-field="doc.partner_id.country_id.name"/>
                                     </p>
-                                    <p style="margin: 2px 0;" t-if="doc.partner_id.email">
+                                    <p t-if="doc.partner_id.email">
                                         Email: <span t-field="doc.partner_id.email"/>
                                     </p>
-                                    <p style="margin: 2px 0;" t-if="doc.partner_id.phone">
+                                    <p t-if="doc.partner_id.phone">
                                         Tel: <span t-field="doc.partner_id.phone"/>
                                     </p>
                                 </div>
                                 <div class="col-6">
-                                    <h4 style="color: #8B4513; border-bottom: 2px solid #8B4513; padding-bottom: 5px;">Bakkerij Info:</h4>
-                                    <p style="margin: 5px 0;"><strong>Uw Lokale Bakkerij</strong></p>
-                                    <p style="margin: 2px 0;">Bakkerijstraat 123</p>
-                                    <p style="margin: 2px 0;">1000 Brussel</p>
-                                    <p style="margin: 2px 0;">België</p>
-                                    <p style="margin: 2px 0;">Email: info@bakkerij.be</p>
-                                    <p style="margin: 2px 0;">Tel: +32 2 123 45 67</p>
+                                    <h4 class="text-primary border-bottom pb-2">Bakkerij Info:</h4>
+                                    <p><strong>Uw Lokale Bakkerij</strong></p>
+                                    <p>Bakkerijstraat 123</p>
+                                    <p>1000 Brussel</p>
+                                    <p>België</p>
+                                    <p>Email: info@bakkerij.be</p>
+                                    <p>Tel: +32 2 123 45 67</p>
                                 </div>
                             </div>
 
                             <!-- Factuur details tabel -->
-                            <table class="table table-sm" style="margin-bottom: 30px;">
-                                <thead style="background-color: #f8f9fa;">
-                                    <tr>
-                                        <th style="border: 1px solid #dee2e6; padding: 12px; background-color: #8B4513; color: white;">Product</th>
-                                        <th style="border: 1px solid #dee2e6; padding: 12px; background-color: #8B4513; color: white; text-align: center;">Aantal</th>
-                                        <th style="border: 1px solid #dee2e6; padding: 12px; background-color: #8B4513; color: white; text-align: right;">Prijs per stuk</th>
-                                        <th style="border: 1px solid #dee2e6; padding: 12px; background-color: #8B4513; color: white; text-align: right;">Subtotaal</th>
+                            <table class="table table-sm mb-4">
+                                <thead>
+                                    <tr class="bg-primary text-white">
+                                        <th>Product</th>
+                                        <th class="text-center">Aantal</th>
+                                        <th class="text-right">Prijs per stuk</th>
+                                        <th class="text-right">Subtotaal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="border: 1px solid #dee2e6; padding: 12px;">
+                                        <td>
                                             <strong><span t-field="doc.koek_id.name_koek"/></strong>
                                             <br/>
-                                            <small style="color: #666;">
+                                            <small class="text-muted">
                                                 Categorie: <span t-field="doc.koek_id.categorie_koek_id.name"/>
                                             </small>
-                                            <div t-if="doc.koek_id.tags_ids" style="margin-top: 5px;">
+                                            <div t-if="doc.koek_id.tags_ids" class="mt-1">
                                                 <t t-foreach="doc.koek_id.tags_ids" t-as="tag">
-                                                    <span class="badge" style="background-color: #f8f9fa; color: #495057; margin-right: 3px; padding: 3px 6px; font-size: 10px;">
+                                                    <span class="badge badge-light mr-1">
                                                         <span t-field="tag.name"/>
                                                     </span>
                                                 </t>
                                             </div>
                                         </td>
-                                        <td style="border: 1px solid #dee2e6; padding: 12px; text-align: center;">
+                                        <td class="text-center">
                                             <span t-field="doc.aantal"/>
                                         </td>
-                                        <td style="border: 1px solid #dee2e6; padding: 12px; text-align: right;">
+                                        <td class="text-right">
                                             €<span t-field="doc.prijs_per_stuk" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </td>
-                                        <td style="border: 1px solid #dee2e6; padding: 12px; text-align: right;">
+                                        <td class="text-right">
                                             €<span t-field="doc.subtotaal" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </td>
                                     </tr>
@@ -113,22 +113,22 @@
                                 <div class="col-5">
                                     <table class="table table-sm">
                                         <tr>
-                                            <td style="padding: 8px; border-top: 1px solid #dee2e6;"><strong>Subtotaal:</strong></td>
-                                            <td style="padding: 8px; text-align: right; border-top: 1px solid #dee2e6;">
+                                            <td><strong>Subtotaal:</strong></td>
+                                            <td class="text-right">
                                                 €<span t-field="doc.subtotaal" t-options="{'widget': 'float', 'precision': 2}"/>
                                             </td>
                                         </tr>
                                         <tr t-if="doc.korting_percentage > 0">
-                                            <td style="padding: 8px;">
+                                            <td>
                                                 <strong>Korting (<span t-field="doc.korting_percentage"/>%):</strong>
                                             </td>
-                                            <td style="padding: 8px; text-align: right;">
+                                            <td class="text-right">
                                                 -€<span t-field="doc.korting_bedrag" t-options="{'widget': 'float', 'precision': 2}"/>
                                             </td>
                                         </tr>
-                                        <tr style="background-color: #f8f9fa;">
-                                            <td style="padding: 12px; border-top: 2px solid #8B4513;"><strong>Totaal:</strong></td>
-                                            <td style="padding: 12px; text-align: right; border-top: 2px solid #8B4513;">
+                                        <tr class="bg-light">
+                                            <td class="border-top border-primary"><strong>Totaal:</strong></td>
+                                            <td class="text-right border-top border-primary">
                                                 <strong>€<span t-field="doc.totaal_bedrag" t-options="{'widget': 'float', 'precision': 2}"/></strong>
                                             </td>
                                         </tr>
@@ -137,11 +137,11 @@
                             </div>
 
                             <!-- Betaling info -->
-                            <div class="row" style="margin-top: 30px;">
+                            <div class="row mt-4">
                                 <div class="col-12">
-                                    <div style="background-color: #e8f5e8; padding: 15px; border-radius: 5px; border-left: 5px solid #4CAF50;">
-                                        <h5 style="color: #4CAF50; margin: 0;">✅ Betaling Ontvangen</h5>
-                                        <p style="margin: 5px 0 0 0;">
+                                    <div class="alert alert-success">
+                                        <h5>✅ Betaling Ontvangen</h5>
+                                        <p class="mb-0">
                                             Betaalmethode: 
                                             <t t-if="doc.betaal_methode == 'cash'">Contant</t>
                                             <t t-if="doc.betaal_methode == 'card'">Bankkaart</t>
@@ -152,24 +152,24 @@
                             </div>
 
                             <!-- Opmerkingen -->
-                            <div t-if="doc.opmerkingen" class="row" style="margin-top: 20px;">
+                            <div t-if="doc.opmerkingen" class="row mt-3">
                                 <div class="col-12">
-                                    <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; border-left: 5px solid #ffc107;">
-                                        <h5 style="color: #856404; margin: 0;">Opmerkingen:</h5>
-                                        <p style="margin: 5px 0 0 0;"><span t-field="doc.opmerkingen"/></p>
+                                    <div class="alert alert-warning">
+                                        <h5>Opmerkingen:</h5>
+                                        <p class="mb-0"><span t-field="doc.opmerkingen"/></p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Footer -->
-                            <div class="row" style="margin-top: 50px; text-align: center; color: #666;">
+                            <div class="row mt-5 text-center text-muted">
                                 <div class="col-12">
-                                    <hr style="border-top: 1px solid #8B4513;"/>
-                                    <p style="margin: 10px 0;">
+                                    <hr class="border-primary"/>
+                                    <p>
                                         <strong>Dank u wel voor uw bezoek aan onze bakkerij!</strong><br/>
                                         We hopen u snel weer te zien voor onze verse lekkernijen.
                                     </p>
-                                    <p style="margin: 5px 0; font-size: 12px;">
+                                    <p class="small">
                                         🍪 Uw lokale bakkerij - Vers gebakken elke dag! 🥐
                                     </p>
                                 </div>
