@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from datetime import timedelta
+from odoo.exceptions import ValidationError
 
 class BakkerKoeken(models.Model):
     _name = "bakker_koeken"
@@ -19,3 +20,14 @@ class BakkerKoeken(models.Model):
     def _compute_totaal_inventarisatie(self):
         for record in self:
             record.totaal_inventarisatie = record.prijs_koek * record.voorraad_koek
+            
+    @api.constrains('voorraad_koek', 'prijs_koek')
+    def _check_non_negative(self):
+        for record in self:
+            if record.voorraad_koek < 0:
+                raise ValidationError("Voorraad van de koek kan niet negatief zijn.")
+            if record.prijs_koek < 0:
+                raise ValidationError("Prijs van de koek kan niet negatief zijn.")
+
+    
+    
