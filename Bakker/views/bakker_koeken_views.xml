@@ -83,9 +83,9 @@
                     
                     <!-- Verkoop buttons -->
                     <button name="action_verkoop_koek" type="object" 
-                        string="💰 Verkoop Koek" class="btn-warning"/>
+                        string="💰 Verkoop Koek" class="btn-warning" invisible="voorraad_koek &lt;= 0" />
                     <button name="action_snelle_verkoop" type="object" 
-                        string="⚡ Snelle Verkoop" class="btn-info"/>
+                        string="⚡ Snelle Verkoop" class="btn-info" invisible="voorraad_koek &lt;= 0"/>
                     
                     <!-- Andere buttons -->
                     <button name="action_mark_populair" type="object"

@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 class BakkerKoeken(models.Model):
     _name = "bakker_koeken"
     _description = "Bakker zijn lekkere koeken"
+    _order = "name_koek asc"
 
     name_koek = fields.Char(string="Naam van de koek", required=True, help="Vul hier de naam van de koek in")
     prijs_koek = fields.Float(string="Prijs van de koek", required=True, help="Vul hier de prijs van de koek in")

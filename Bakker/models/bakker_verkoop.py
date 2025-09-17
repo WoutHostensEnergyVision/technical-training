@@ -4,8 +4,9 @@ from odoo.exceptions import ValidationError
 class BakkerVerkoop(models.Model):
     _name = "bakker_verkoop"
     _description = "Verkoop van bakkerij koeken"
-    _inherit = ['mail.thread', 'mail.activity.mixin']  # Voeg mail functionaliteit toe
+    _inherit = ['mail.thread', 'mail.activity.mixin'] 
     _order = "verkoop_datum desc"
+    
     
     name = fields.Char(string="Verkoop Nummer", required=True, default="Nieuw", tracking=True)
     koek_id = fields.Many2one('bakker_koeken', string="Koek", required=True, tracking=True)
