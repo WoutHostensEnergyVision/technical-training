@@ -132,7 +132,8 @@
                                 <list>
                                     <field name="name"/>
                                     <field name="verkoop_datum"/>
-                                    <field name="klant_naam"/>
+                                    <field name="partner_id"/>
+                                    <field name="klant_email"/>
                                     <field name="aantal"/>
                                     <field name="totaal_bedrag"/>
                                     <field name="status"/>

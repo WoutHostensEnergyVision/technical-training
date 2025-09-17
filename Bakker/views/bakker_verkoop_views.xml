@@ -10,7 +10,9 @@
                     <field name="name"/>
                     <field name="verkoop_datum"/>
                     <field name="koek_id"/>
-                    <field name="klant_naam"/>
+                    <field name="partner_id"/>
+                    <field name="klant_email"/>
+                    <field name="klant_telefoon"/>
                     <field name="aantal"/>
                     <field name="totaal_bedrag"/>
                     <field name="betaal_methode"/>
@@ -45,7 +47,7 @@
                                 <field name="korting_percentage"/>
                             </group>
                             <group>
-                                <field name="klant_naam"/>
+                                <field name="partner_id"/>
                                 <field name="klant_email"/>
                                 <field name="klant_telefoon"/>
                                 <field name="verkoop_datum"/>
@@ -82,9 +84,15 @@
                             <field name="totaal_bedrag" readonly="1"/>
                         </group>
                         <group>
-                            <field name="klant_naam"/>
+                            <label for="partner_id"/>
+                            <div class="o_row">
+                                <field name="partner_id" placeholder="Selecteer klant..." context="{'res_partner_search_mode': 'customer'}"/>
+                                <button name="action_create_new_customer" type="object" string="➕" title="Nieuwe klant aanmaken" class="btn btn-link"/>
+                            </div>
                             <field name="klant_email"/>
                             <field name="klant_telefoon"/>
+                            <field name="klant_adres"/>
+                            <field name="klant_stad"/>
                             <field name="betaal_methode"/>
                             <field name="direct_betaald"/>
                         </group>

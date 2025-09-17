@@ -8,9 +8,9 @@ class BakkerVerkoop(models.Model):
     
     name = fields.Char(string="Verkoop Nummer", required=True, default="Nieuw")
     koek_id = fields.Many2one('bakker_koeken', string="Koek", required=True)
-    klant_naam = fields.Char(string="Klant Naam", required=True)
-    klant_email = fields.Char(string="Klant Email")
-    klant_telefoon = fields.Char(string="Klant Telefoon")
+    partner_id = fields.Many2one('res.partner', string="Klant", required=True)
+    klant_email = fields.Char(string="Email", related='partner_id.email', readonly=True)
+    klant_telefoon = fields.Char(string="Telefoon", related='partner_id.phone', readonly=True)
     aantal = fields.Integer(string="Aantal", required=True, default=1)
     prijs_per_stuk = fields.Float(string="Prijs per stuk", required=True)
     korting_percentage = fields.Float(string="Korting (%)", default=0.0)
@@ -118,9 +118,7 @@ class BakkerVerkoopWizard(models.TransientModel):
     _description = 'Wizard voor het verkopen van koeken'
     
     koek_id = fields.Many2one('bakker_koeken', string='Koek', required=True)
-    klant_naam = fields.Char(string='Klant Naam', required=True, default='Walk-in klant')
-    klant_email = fields.Char(string='Klant Email')
-    klant_telefoon = fields.Char(string='Klant Telefoon')
+    partner_id = fields.Many2one('res.partner', string='Klant', required=True)
     aantal = fields.Integer(string='Aantal', required=True, default=1)
     prijs_per_stuk = fields.Float(string='Prijs per stuk', required=True)
     korting_percentage = fields.Float(string='Korting (%)', default=0.0)
@@ -133,6 +131,12 @@ class BakkerVerkoopWizard(models.TransientModel):
         ('card', 'Bankkaart'),
         ('digital', 'Digitaal')
     ], string="Betaal Methode", default='cash')
+    
+    # Gerelateerde velden van de klant
+    klant_email = fields.Char(string="Email", related='partner_id.email', readonly=True)
+    klant_telefoon = fields.Char(string="Telefoon", related='partner_id.phone', readonly=True)
+    klant_adres = fields.Char(string="Adres", related='partner_id.street', readonly=True)
+    klant_stad = fields.Char(string="Stad", related='partner_id.city', readonly=True)
     
     @api.depends('prijs_per_stuk', 'korting_percentage')
     def _compute_finale_prijs(self):
@@ -157,9 +161,7 @@ class BakkerVerkoopWizard(models.TransientModel):
         """Voer de verkoop uit"""
         verkoop = self.env['bakker_verkoop'].create({
             'koek_id': self.koek_id.id,
-            'klant_naam': self.klant_naam,
-            'klant_email': self.klant_email,
-            'klant_telefoon': self.klant_telefoon,
+            'partner_id': self.partner_id.id,
             'aantal': self.aantal,
             'prijs_per_stuk': self.finale_prijs,
             'korting_percentage': self.korting_percentage,
@@ -180,4 +182,15 @@ class BakkerVerkoopWizard(models.TransientModel):
             'res_id': verkoop.id,
             'view_mode': 'form',
             'target': 'current',
+        }
+    
+    def action_create_new_customer(self):
+        """Maak een nieuwe klant aan"""
+        return {
+            'name': 'Nieuwe Klant',
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.partner',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_is_company': False, 'default_customer_rank': 1}
         }
