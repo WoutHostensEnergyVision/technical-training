@@ -135,6 +135,10 @@ class BakkerVerkoop(models.Model):
                 'type': 'warning',
             }
         }
+    
+    def action_print_factuur(self):
+        """Print factuur PDF"""
+        return self.env.ref('Bakker.report_bakker_factuur').report_action(self)
 
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
