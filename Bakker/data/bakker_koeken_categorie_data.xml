@@ -11,25 +11,25 @@
         <record id="categorie_fruit" model="bakker_koeken_categorie">
             <field name="name">Fruit</field>
             <field name="beschrijving">Koeken met fruit</field>
-            <field name="actief" eval="True"/>
+            <field name="actie">TRUE</field>
         </record>
 
         <record id="categorie_noten" model="bakker_koeken_categorie">
             <field name="name">Noten</field>
             <field name="beschrijving">Koeken met noten</field>
-            <field name="actief" eval="True"/>
+            <field name="actie">TRUE</field>
         </record>
 
         <record id="categorie_speculaas" model="bakker_koeken_categorie">
             <field name="name">Speculaas</field>
             <field name="beschrijving">Speculaas koeken</field>
-            <field name="actief" eval="True"/>
+            <field name="actie">TRUE</field>
         </record>
 
         <record id="categorie_pudding" model="bakker_koeken_categorie">
             <field name="name">Pudding</field>
             <field name="beschrijving">Koeken met pudding</field>
-            <field name="actief" eval="True"/>
+            <field name="actie">TRUE</field>
         </record>
     </data>
 </odoo>
