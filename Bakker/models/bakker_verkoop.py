@@ -145,17 +145,34 @@ class BakkerVerkoop(models.Model):
         """Open standaard print wizard voor factuur"""
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Print Factuur',
-            'res_model': 'ir.actions.report',
+            'name': 'Print Opties',
+            'res_model': 'base.document.layout',
             'view_mode': 'form',
             'target': 'new',
             'context': {
-                'default_model': 'bakker_verkoop',
-                'default_ids': self.ids,
+                'default_report_template': 'web.external_layout_standard',
                 'active_ids': self.ids,
                 'active_model': 'bakker_verkoop',
-            },
-            'domain': [('model', '=', 'bakker_verkoop')],
+                'report_action': 'Bakker.report_bakker_factuur',
+            }
+        }
+    
+    def action_configure_print(self):
+        """Open document layout configuratie voor factuur"""
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Configure Document Layout',
+            'res_model': 'base.document.layout',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_report_layout': 'web.external_layout_standard',
+                'default_logo': True,
+                'default_company_details': True,
+                'model': 'bakker_verkoop',
+                'active_ids': self.ids,
+                'active_model': 'bakker_verkoop',
+            }
         }
 
 class BakkerVerkoopWizard(models.TransientModel):
