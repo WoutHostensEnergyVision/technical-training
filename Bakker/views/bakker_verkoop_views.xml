@@ -132,7 +132,7 @@
                         
                         <!-- PDF Preview -->
                         <div style="margin: 20px 0;">
-                            <label string="Factuur Preview:"/>
+                            <div class="o_form_label">Factuur Preview:</div>
                             <field name="pdf_data" widget="pdf_viewer" 
                                    options="{'height': 600}" 
                                    invisible="not pdf_data"/>
