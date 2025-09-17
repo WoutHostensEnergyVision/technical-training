@@ -9,7 +9,7 @@
                 <list>
                     <field name="name"/>
                     <field name="beschrijving"/>
-                    <field name="actief"/>
+                    <field name="active"/>
                 </list>
             </field>
         </record>
@@ -23,7 +23,7 @@
                     <sheet>
                         <group>
                             <field name="name"/>
-                            <field name="actief"/>
+                            <field name="active"/>
                         </group>
                         <group>
                             <field name="beschrijving"/>

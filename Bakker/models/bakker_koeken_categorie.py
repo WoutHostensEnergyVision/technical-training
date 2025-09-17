@@ -6,4 +6,4 @@ class BakkerKoekenCategorie(models.Model):
 
     name = fields.Char(string="Categorie naam", required=True)
     beschrijving = fields.Text(string="Beschrijving")
-    actief = fields.Boolean(string="Actief", default=True)
+    active = fields.Boolean(string="Actief", default=True)
