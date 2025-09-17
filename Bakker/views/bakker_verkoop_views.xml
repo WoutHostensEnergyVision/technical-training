@@ -115,7 +115,7 @@
         <!-- Menu Item -->
         <menuitem id="menu_bakker_verkoop" 
                   name="Verkopen" 
-                  parent="menu_bakker_koeken" 
+                  parent="bakker_menu_root" 
                   action="action_bakker_verkoop" 
                   sequence="20"/>
     </data>
