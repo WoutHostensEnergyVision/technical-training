@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Voorbeelden van aaap.plaats records -->
+        <record id="aaap_plaats_1" model="aaap.plaats">
+            <field name="name">Dirk</field>
+            <field name="description">Een speelse aap die graag klimt in de bomen.</field>
+            <field name="location">Afrika</field>
+            <field name="aantal_dagelijkse_bananen">12</field>
+            <field name="geboorte_datum">2020-05-15</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#8B4513</field> <!-- Bruin -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_chimpansee"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_speels'), ref('aaap.tag_bananenliefhebber')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap1.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_2" model="aaap.plaats">
+            <field name="name">Emma</field>
+            <field name="description">Een slimme aap die gereedschappen kan gebruiken.</field>
+            <field name="location">Azië</field>
+            <field name="aantal_dagelijkse_bananen">8</field>
+            <field name="geboorte_datum">2018-10-23</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#808080</field> <!-- Grijs -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_orang_oetan"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_slim'), ref('aaap.tag_rustig')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap2.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_3" model="aaap.plaats">
+            <field name="name">Philip</field>
+            <field name="description">Een sterke aap die de leider is van zijn groep.</field>
+            <field name="location">Nederland</field>
+            <field name="aantal_dagelijkse_bananen">15</field>
+            <field name="geboorte_datum">2019-03-08</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#4169E1</field> <!-- Blauw -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_gorilla"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_groot'), ref('aaap.tag_bananenliefhebber')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap3.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_4" model="aaap.plaats">
+            <field name="name">Sophie</field>
+            <field name="description">Een zorgzame aap die goed voor de jongen zorgt.</field>
+            <field name="location">Indonesië</field>
+            <field name="aantal_dagelijkse_bananen">10</field>
+            <field name="geboorte_datum">2017-12-05</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#FFD700</field> <!-- Goud -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_orang_oetan"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_sociaal'), ref('aaap.tag_rustig')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap4.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_5" model="aaap.plaats">
+            <field name="name">Lucas</field>
+            <field name="description">Een nieuwsgierige aap die graag nieuwe dingen onderzoekt.</field>
+            <field name="location">Congo</field>
+            <field name="aantal_dagelijkse_bananen">14</field>
+            <field name="geboorte_datum">2021-02-18</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#A0522D</field> <!-- Sienna -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_bonobo"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_speels'), ref('aaap.tag_slim')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap5.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_6" model="aaap.plaats">
+            <field name="name">Julia</field>
+            <field name="description">Een verlegen aap die zich verstopt voor bezoekers.</field>
+            <field name="location">Borneo</field>
+            <field name="aantal_dagelijkse_bananen">7</field>
+            <field name="geboorte_datum">2019-07-22</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#FFA07A</field> <!-- Lichtzalm -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_orang_oetan"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_klein'), ref('aaap.tag_rustig')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap6.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_7" model="aaap.plaats">
+            <field name="name">Thomas</field>
+            <field name="description">Een atletische aap die grote afstanden kan springen.</field>
+            <field name="location">Rwanda</field>
+            <field name="aantal_dagelijkse_bananen">16</field>
+            <field name="geboorte_datum">2018-04-11</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#556B2F</field> <!-- Donker olijfgroen -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_chimpansee"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_speels'), ref('aaap.tag_sociaal')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap7.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_8" model="aaap.plaats">
+            <field name="name">Lisa</field>
+            <field name="description">Een sociale aap die goed met andere soorten kan opschieten.</field>
+            <field name="location">Thailand</field>
+            <field name="aantal_dagelijkse_bananen">9</field>
+            <field name="geboorte_datum">2020-11-30</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#DEB887</field> <!-- Burlywood -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_capucijneraap"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_sociaal'), ref('aaap.tag_klein'), ref('aaap.tag_fruiteters')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap8.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_9" model="aaap.plaats">
+            <field name="name">David</field>
+            <field name="description">Een dappere aap die zijn familie beschermt.</field>
+            <field name="location">Uganda</field>
+            <field name="aantal_dagelijkse_bananen">13</field>
+            <field name="geboorte_datum">2016-09-14</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#483D8B</field> <!-- Donker leikleur -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_gorilla"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_groot'), ref('aaap.tag_rustig')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap9.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_10" model="aaap.plaats">
+            <field name="name">Anna</field>
+            <field name="description">Een creatieve aap die speelgoed maakt van takken.</field>
+            <field name="location">Costa Rica</field>
+            <field name="aantal_dagelijkse_bananen">11</field>
+            <field name="geboorte_datum">2019-08-02</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#FF4500</field> <!-- Oranje rood -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_capucijneraap"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_slim'), ref('aaap.tag_klein')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap10.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_11" model="aaap.plaats">
+            <field name="name">Kasper</field>
+            <field name="description">Een jonge aap met veel it wijsheid en ervaring.</field>
+            <field name="location">Gavere</field>
+            <field name="aantal_dagelijkse_bananen">6</field>
+            <field name="geboorte_datum">2000-03-27</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#2F4F4F</field> <!-- Donker leisteen grijs -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_orang_oetan"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_rustig'), ref('aaap.tag_slim')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap15.png"/>
+        </record>
+
+        <record id="aaap_plaats_12" model="aaap.plaats">
+            <field name="name">Nina</field>
+            <field name="description">Een vrolijke aap die graag in groepen speelt.</field>
+            <field name="location">Madagaskar</field>
+            <field name="aantal_dagelijkse_bananen">8</field>
+            <field name="geboorte_datum">2021-01-10</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#9ACD32</field> <!-- Geel groen -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_lemuur"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_klein'), ref('aaap.tag_speels'), ref('aaap.tag_sociaal')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap12.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_13" model="aaap.plaats">
+            <field name="name">Max</field>
+            <field name="description">Een aap die bekend staat om zijn luide roep door het woud.</field>
+            <field name="location">Brazilië</field>
+            <field name="aantal_dagelijkse_bananen">17</field>
+            <field name="geboorte_datum">2018-06-19</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#800000</field> <!-- Kastanjebruin -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_baviaan"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_harig'), ref('aaap.tag_bananenliefhebber')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap13.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_14" model="aaap.plaats">
+            <field name="name">Eva</field>
+            <field name="description">Een aap met een uniek wit patroon op haar vacht.</field>
+            <field name="location">Kenia</field>
+            <field name="aantal_dagelijkse_bananen">9</field>
+            <field name="geboorte_datum">2020-04-05</field>
+            <field name="geslacht">vrouw</field>
+            <field name="kleur">#F5F5DC</field> <!-- Beige -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_meerkat"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_klein'), ref('aaap.tag_sociaal'), ref('aaap.tag_fluffy')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap14.jpeg"/>
+        </record>
+
+        <record id="aaap_plaats_15" model="aaap.plaats">
+            <field name="name">Oscar</field>
+            <field name="description">Een aap die een bijzondere band heeft met zijn verzorgers.</field>
+            <field name="location">Singapore Zoo</field>
+            <field name="aantal_dagelijkse_bananen">10</field>
+            <field name="geboorte_datum">2019-10-08</field>
+            <field name="geslacht">man</field>
+            <field name="kleur">#8FBC8F</field> <!-- Donker zee groen -->
+            <field name="dood">False</field>
+            <field name="aantal_poten">4</field>
+            <field name="type_id" ref="aaap.aaap_type_bonobo"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('aaap.tag_sociaal'), ref('aaap.tag_fruiteters'), ref('aaap.tag_harig')])]"/>
+            <!-- Voeg afbeelding toe -->
+            <field name="image_1920" type="base64" file="aaap/static/img/aap11.jpeg"/>
+        </record>
+    </data>
+</odoo>
