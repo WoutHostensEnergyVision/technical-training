@@ -4,31 +4,32 @@ from odoo.exceptions import ValidationError
 class BakkerVerkoop(models.Model):
     _name = "bakker_verkoop"
     _description = "Verkoop van bakkerij koeken"
+    _inherit = ['mail.thread', 'mail.activity.mixin']  # Voeg mail functionaliteit toe
     _order = "verkoop_datum desc"
     
-    name = fields.Char(string="Verkoop Nummer", required=True, default="Nieuw")
-    koek_id = fields.Many2one('bakker_koeken', string="Koek", required=True)
-    partner_id = fields.Many2one('res.partner', string="Klant", required=True)
+    name = fields.Char(string="Verkoop Nummer", required=True, default="Nieuw", tracking=True)
+    koek_id = fields.Many2one('bakker_koeken', string="Koek", required=True, tracking=True)
+    partner_id = fields.Many2one('res.partner', string="Klant", required=True, tracking=True)
     klant_email = fields.Char(string="Email", related='partner_id.email', readonly=True)
     klant_telefoon = fields.Char(string="Telefoon", related='partner_id.phone', readonly=True)
-    aantal = fields.Integer(string="Aantal", required=True, default=1)
-    prijs_per_stuk = fields.Float(string="Prijs per stuk", required=True)
-    korting_percentage = fields.Float(string="Korting (%)", default=0.0)
+    aantal = fields.Integer(string="Aantal", required=True, default=1, tracking=True)
+    prijs_per_stuk = fields.Float(string="Prijs per stuk", required=True, tracking=True)
+    korting_percentage = fields.Float(string="Korting (%)", default=0.0, tracking=True)
     subtotaal = fields.Float(string="Subtotaal", compute="_compute_totalen", store=True)
     korting_bedrag = fields.Float(string="Korting Bedrag", compute="_compute_totalen", store=True)
-    totaal_bedrag = fields.Float(string="Totaal Bedrag", compute="_compute_totalen", store=True)
-    verkoop_datum = fields.Datetime(string="Verkoop Datum", default=fields.Datetime.now)
+    totaal_bedrag = fields.Float(string="Totaal Bedrag", compute="_compute_totalen", store=True, tracking=True)
+    verkoop_datum = fields.Datetime(string="Verkoop Datum", default=fields.Datetime.now, tracking=True)
     status = fields.Selection([
         ('concept', 'Concept'),
         ('bevestigd', 'Bevestigd'),
         ('betaald', 'Betaald'),
         ('geannuleerd', 'Geannuleerd')
-    ], string="Status", default='concept')
+    ], string="Status", default='concept', tracking=True)
     betaal_methode = fields.Selection([
         ('cash', 'Contant'),
         ('card', 'Bankkaart'),
         ('digital', 'Digitaal')
-    ], string="Betaal Methode")
+    ], string="Betaal Methode", tracking=True)
     opmerkingen = fields.Text(string="Opmerkingen")
     
     @api.model
@@ -90,7 +91,7 @@ class BakkerVerkoop(models.Model):
                         # Verstuur email
                         template.send_mail(record.id, force_send=True)
                         
-                        # Log activiteit
+                        # Log activiteit (nu werkt message_post)
                         record.message_post(
                             body=f"Factuur email verstuurd naar {record.partner_id.email}",
                             subject="Factuur Email Verstuurd"
