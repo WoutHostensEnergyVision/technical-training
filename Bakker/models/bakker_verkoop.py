@@ -138,19 +138,8 @@ class BakkerVerkoop(models.Model):
         }
     
     def action_print_factuur(self):
-        """Open factuur preview wizard"""
-        wizard = self.env['bakker.factuur.wizard'].create({
-            'verkoop_id': self.id,
-        })
-        
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Factuur Preview',
-            'res_model': 'bakker.factuur.wizard',
-            'res_id': wizard.id,
-            'view_mode': 'form',
-            'target': 'new',
-        }
+        """Print factuur PDF"""
+        return self.env.ref('Bakker.report_bakker_factuur').report_action(self)
 
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
