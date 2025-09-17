@@ -131,7 +131,7 @@
                         </group>
                         
                         <!-- PDF Preview -->
-                        <div t-if="show_preview" style="margin: 20px 0;">
+                        <div style="margin: 20px 0;">
                             <label string="Factuur Preview:"/>
                             <field name="pdf_data" widget="pdf_viewer" 
                                    options="{'height': 600}" 
