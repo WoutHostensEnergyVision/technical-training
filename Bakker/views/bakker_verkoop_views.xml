@@ -34,6 +34,8 @@
                                 class="btn-success" invisible="status != 'bevestigd'"/>
                         <button name="action_configure_print" type="object" string="🎨 Configureer Print" 
                                 class="btn-warning" invisible="status == 'concept'"/>
+                        <button name="action_print_with_layout" type="object" string="📄 Print Factuur" 
+                                class="btn-info" invisible="status == 'concept'"/>
                         <button name="action_annuleer" type="object" string="Annuleer" 
                                 class="btn-danger" invisible="status == 'betaald'"
                                 confirm="Weet je zeker dat je deze verkoop wilt annuleren?"/>
