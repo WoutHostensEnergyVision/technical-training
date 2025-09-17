@@ -189,28 +189,12 @@ class BakkerVerkoop(models.Model):
                 'default_company_details': True,
                 'active_ids': self.ids,
                 'active_model': 'bakker_verkoop',
-                'report_action': self.env.ref('Bakker.report_bakker_factuur').id,
+                'report_action': self.env.ref('Bakker.report_bakker_factuur').report_action(self),
                 'close_on_report_download': True,
             }
         }
-        """Print factuur met document layout opties"""
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Print Factuur',
-            'res_model': 'base.document.layout',
-            'view_mode': 'form',
-            'target': 'new',
-            'context': {
-                'default_report_layout': 'web.external_layout_standard',
-                'default_logo': True,
-                'default_company_details': True,
-                'model': 'bakker_verkoop',
-                'active_ids': self.ids,
-                'active_model': 'bakker_verkoop',
-                'report_action': 'Bakker.report_bakker_factuur',
-                'close_on_report_download': True,
-            }
-        }
+        
+        
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
     _description = 'Wizard voor het verkopen van koeken'
