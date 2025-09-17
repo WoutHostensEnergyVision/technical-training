@@ -51,7 +51,6 @@
         <!-- Menu item voor categorieën -->
         <menuitem id="menu_bakker_koeken_categorie"
                   name="Categorieën"
-                  parent="menu_bakker_koeken_root"
                   action="action_bakker_koeken_categorie"
                   sequence="20"/>
     </data>
