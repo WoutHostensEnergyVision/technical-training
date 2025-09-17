@@ -190,11 +190,10 @@ class BakkerVerkoop(models.Model):
                 'model': 'bakker_verkoop',
                 'active_ids': self.ids,
                 'active_model': 'bakker_verkoop',
-                'report_action': self.env.ref('Bakker.report_bakker_factuur').id,
+                'report_action': 'Bakker.report_bakker_factuur',
                 'close_on_report_download': True,
             }
         }
-
 class BakkerVerkoopWizard(models.TransientModel):
     _name = 'bakker.verkoop.wizard'
     _description = 'Wizard voor het verkopen van koeken'
