@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Verkoop List View -->
+        <record id="view_bakker_verkoop_list" model="ir.ui.view">
+            <field name="name">bakker.verkoop.list</field>
+            <field name="model">bakker_verkoop</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="verkoop_datum"/>
+                    <field name="koek_id"/>
+                    <field name="klant_naam"/>
+                    <field name="aantal"/>
+                    <field name="totaal_bedrag"/>
+                    <field name="betaal_methode"/>
+                    <field name="status" decoration-success="status == 'betaald'" decoration-info="status == 'bevestigd'" decoration-muted="status == 'geannuleerd'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Verkoop Form View -->
+        <record id="view_bakker_verkoop_form" model="ir.ui.view">
+            <field name="name">bakker.verkoop.form</field>
+            <field name="model">bakker_verkoop</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_bevestig_verkoop" type="object" string="Bevestig Verkoop" 
+                                class="btn-primary" invisible="status != 'concept'"/>
+                        <button name="action_markeer_betaald" type="object" string="Markeer Betaald" 
+                                class="btn-success" invisible="status != 'bevestigd'"/>
+                        <button name="action_annuleer" type="object" string="Annuleer" 
+                                class="btn-danger" invisible="status == 'betaald'"
+                                confirm="Weet je zeker dat je deze verkoop wilt annuleren?"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="koek_id"/>
+                                <field name="aantal"/>
+                                <field name="prijs_per_stuk"/>
+                                <field name="korting_percentage"/>
+                            </group>
+                            <group>
+                                <field name="klant_naam"/>
+                                <field name="klant_email"/>
+                                <field name="klant_telefoon"/>
+                                <field name="verkoop_datum"/>
+                                <field name="betaal_methode"/>
+                            </group>
+                        </group>
+                        <group string="Totalen" col="4">
+                            <field name="subtotaal"/>
+                            <field name="korting_bedrag"/>
+                            <field name="totaal_bedrag"/>
+                        </group>
+                        <group>
+                            <field name="opmerkingen"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Verkoop Wizard Form View -->
+        <record id="view_bakker_verkoop_wizard_form" model="ir.ui.view">
+            <field name="name">bakker.verkoop.wizard.form</field>
+            <field name="model">bakker.verkoop.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Koek Verkopen">
+                    <group>
+                        <group>
+                            <field name="koek_id" readonly="1"/>
+                            <field name="beschikbare_voorraad" readonly="1"/>
+                            <field name="aantal"/>
+                            <field name="prijs_per_stuk"/>
+                            <field name="korting_percentage"/>
+                            <field name="finale_prijs" readonly="1"/>
+                            <field name="totaal_bedrag" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="klant_naam"/>
+                            <field name="klant_email"/>
+                            <field name="klant_telefoon"/>
+                            <field name="betaal_methode"/>
+                            <field name="direct_betaald"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_verkoop" type="object" string="💰 Verkoop!" class="btn-primary"/>
+                        <button string="Annuleer" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Verkoop Action -->
+        <record id="action_bakker_verkoop" model="ir.actions.act_window">
+            <field name="name">Verkopen</field>
+            <field name="res_model">bakker_verkoop</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_bakker_verkoop" 
+                  name="Verkopen" 
+                  parent="menu_bakker_koeken_tags" 
+                  action="action_bakker_verkoop" 
+                  sequence="20"/>
+    </data>
+</odoo>

@@ -16,6 +16,24 @@ class BakkerKoeken(models.Model):
     totaal_inventarisatie = fields.Float(string="Totale inventarisatie waarde", compute="_compute_totaal_inventarisatie", store=True, inverse="_inverse_totaal_inventarisatie", help="Totale waarde van de koek in inventarisatie (prijs * voorraad)")
     tags_ids = fields.Many2many('bakker_koeken_tags', string="Tags", help="Selecteer hier de tags voor de koek")
     
+    # Nieuwe verkoop gerelateerde velden
+    verkoop_ids = fields.One2many('bakker_verkoop', 'koek_id', string='Verkopen')
+    totaal_verkocht = fields.Integer(string='Totaal Verkocht', compute='_compute_verkoop_stats', store=True)
+    totaal_omzet = fields.Float(string='Totaal Omzet', compute='_compute_verkoop_stats', store=True)
+    verkoop_count = fields.Integer(string='Aantal Verkopen', compute='_compute_verkoop_count')
+    
+    @api.depends('verkoop_ids.aantal', 'verkoop_ids.totaal_bedrag', 'verkoop_ids.status')
+    def _compute_verkoop_stats(self):
+        for record in self:
+            betaalde_verkopen = record.verkoop_ids.filtered(lambda v: v.status == 'betaald')
+            record.totaal_verkocht = sum(betaalde_verkopen.mapped('aantal'))
+            record.totaal_omzet = sum(betaalde_verkopen.mapped('totaal_bedrag'))
+    
+    @api.depends('verkoop_ids')
+    def _compute_verkoop_count(self):
+        for record in self:
+            record.verkoop_count = len(record.verkoop_ids)
+    
     @api.onchange('prijs_koek', 'voorraad_koek')
     def _onchange_prijs_koek(self):
         self._compute_totaal_inventarisatie()
@@ -145,8 +163,59 @@ class BakkerKoeken(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'bakker_koeken',
             'view_mode': 'pivot,graph',
-            # 'domain': [('id', 'in', self.ids)],
             'context': {
                 'group_by': ['categorie_koek_id'],
             }
         }
+    
+    def action_verkoop_koek(self):
+        """Open wizard om koeken te verkopen"""
+        return {
+            'name': 'Koek Verkopen',
+            'type': 'ir.actions.act_window',
+            'res_model': 'bakker.verkoop.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_koek_id': self.id,
+                'default_prijs_per_stuk': self.prijs_koek,
+            }
+        }
+    
+    def action_view_verkopen(self):
+        """Toon alle verkopen voor deze koek"""
+        return {
+            'name': f'Verkopen voor {self.name_koek}',
+            'type': 'ir.actions.act_window',
+            'res_model': 'bakker_verkoop',
+            'view_mode': 'list,form',
+            'domain': [('koek_id', '=', self.id)],
+            'context': {'default_koek_id': self.id}
+        }
+    
+    def action_snelle_verkoop(self):
+        """Snelle verkoop - direct 1 koek verkopen"""
+        if self.voorraad_koek <= 0:
+            raise ValidationError("Geen voorraad beschikbaar!")
+        
+        verkoop = self.env['bakker_verkoop'].create({
+            'koek_id': self.id,
+            'klant_naam': 'Walk-in klant',
+            'aantal': 1,
+            'prijs_per_stuk': self.prijs_koek,
+            'betaal_methode': 'cash',
+        })
+        
+        verkoop.action_bevestig_verkoop()
+        verkoop.action_markeer_betaald()
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': '💰 Verkoop Voltooid!',
+                'message': f'1x {self.name_koek} verkocht voor €{self.prijs_koek}',
+                'type': 'success',
+            }
+        }
+

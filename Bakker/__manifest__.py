@@ -11,6 +11,7 @@
         "views/bakker_koeken_categorie_views.xml",
         "views/bakker_koeken_tags_views.xml",
         "views/bakker_koeken_views.xml",
+        "views/bakker_verkoop_views.xml",
     ],
     "installable": True,
     'license': 'LGPL-3',

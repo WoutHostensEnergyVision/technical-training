@@ -59,6 +59,8 @@
                 <field name="pudding_koek" />
                 <field name="totaal_inventarisatie" />
                 <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+                <field name="totaal_verkocht"/>
+                <field name="totaal_omzet"/>
             </list>
         </field>
     </record>
@@ -70,6 +72,7 @@
         <field name="arch" type="xml">
             <form string="Bakker Koeken">
                 <header>
+                    <!-- Voorraad buttons -->
                     <button name="action_voorraad_bijvullen" type="object"
                         string="📦 Voorraad Bijvullen" class="btn-success" />
                     <button name="action_verse_batch" type="object"
@@ -77,6 +80,14 @@
                     <button name="action_uitverkocht" type="object"
                         string="❌ Uitverkocht" class="btn-danger"
                         confirm="Weet je zeker dat je dit als uitverkocht wilt markeren?" />
+                    
+                    <!-- Verkoop buttons -->
+                    <button name="action_verkoop_koek" type="object" 
+                        string="💰 Verkoop Koek" class="btn-warning"/>
+                    <button name="action_snelle_verkoop" type="object" 
+                        string="⚡ Snelle Verkoop" class="btn-info"/>
+                    
+                    <!-- Andere buttons -->
                     <button name="action_mark_populair" type="object"
                         string="⭐ Mark Populair" class="btn-secondary" />
                     <button name="action_kwaliteitscontrole" type="object"
@@ -85,9 +96,15 @@
                         string="📊 Lage Voorraad" class="btn-warning"/>
                     <button name="action_verkoop_rapport" type="object" 
                         string="📈 Verkoop Rapport" class="btn-info"/>
-
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_verkopen" 
+                                class="oe_stat_button" icon="fa-money">
+                            <field name="verkoop_count" widget="statinfo" string="Verkopen"/>
+                        </button>
+                    </div>
+                    
                     <group>
                         <field name="name_koek" />
                         <field name="prijs_koek" />
@@ -100,6 +117,29 @@
                         <field name="tags_ids" widget="many2many_tags"
                             options="{'color_field': 'color'}" />
                     </group>
+                    
+                    <!-- Nieuwe verkoop statistieken -->
+                    <group string="Verkoop Statistieken" col="4">
+                        <field name="totaal_verkocht"/>
+                        <field name="totaal_omzet"/>
+                        <field name="verkoop_count"/>
+                    </group>
+                    
+                    <!-- Verkoop historie -->
+                    <notebook>
+                        <page string="Verkoop Historie" name="verkoop_historie">
+                            <field name="verkoop_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="verkoop_datum"/>
+                                    <field name="klant_naam"/>
+                                    <field name="aantal"/>
+                                    <field name="totaal_bedrag"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
