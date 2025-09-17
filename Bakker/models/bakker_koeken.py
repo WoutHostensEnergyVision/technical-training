@@ -16,6 +16,10 @@ class BakkerKoeken(models.Model):
     totaal_inventarisatie = fields.Float(string="Totale inventarisatie waarde", compute="_compute_totaal_inventarisatie", store=True, inverse="_inverse_totaal_inventarisatie", help="Totale waarde van de koek in inventarisatie (prijs * voorraad)")
     tags_ids = fields.Many2many('bakker_koeken_tags', string="Tags", help="Selecteer hier de tags voor de koek")
     
+    @api.onchange('prijs_koek', 'voorraad_koek')
+    def _onchange_prijs_koek(self):
+        self._compute_totaal_inventarisatie()
+    
     @api.depends('prijs_koek', 'voorraad_koek')
     def _compute_totaal_inventarisatie(self):
         for record in self:
