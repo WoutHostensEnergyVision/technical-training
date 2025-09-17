@@ -77,16 +77,15 @@
                     <button name="action_uitverkocht" type="object"
                         string="❌ Uitverkocht" class="btn-danger"
                         confirm="Weet je zeker dat je dit als uitverkocht wilt markeren?" />
-                    <!-- <button name="action_korting_10_procent" type="object"
-                        string="💸 10% Korting" class="btn-warning" />
-                    <button name="action_happy_hour" type="object"
-                        string="🎉 Happy Hour" class="btn-info" />
-                    <button name="action_prijs_verhogen" type="object"
-                        string="📈 Prijs Verhogen" class="btn-warning" /> -->
                     <button name="action_mark_populair" type="object"
                         string="⭐ Mark Populair" class="btn-secondary" />
                     <button name="action_kwaliteitscontrole" type="object"
                         string="✅ Kwaliteitscontrole" class="btn-light" />
+                    <button name="action_view_low_stock" type="object" 
+                        string="📊 Lage Voorraad" class="btn-warning"/>
+                    <button name="action_verkoop_rapport" type="object" 
+                        string="📈 Verkoop Rapport" class="btn-info"/>
+
                 </header>
                 <sheet>
                     <group>
