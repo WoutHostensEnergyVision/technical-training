@@ -43,6 +43,94 @@ class BakkerKoeken(models.Model):
                 raise ValidationError("Voorraad van de koek kan niet negatief zijn.")
             if record.prijs_koek < 0:
                 raise ValidationError("Prijs van de koek kan niet negatief zijn.")
-
+        
+    def action_voorraad_bijvullen(self):
+        """Vul voorraad bij met standaard hoeveelheid"""
+        for record in self:
+            record.voorraad_koek += 20
+            record.aankoopdatum_koek = fields.Date.today()
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'Voorraad Bijgevuld!',
+                'message': f'Voorraad van {self.name_koek} is bijgevuld met 20 stuks',
+                'type': 'success',
+            }
+        }
     
+    def action_uitverkocht(self):
+        """Markeer als uitverkocht"""
+        for record in self:
+            record.voorraad_koek = 0
+        return True
     
+    def action_verse_batch(self):
+        """Maak nieuwe verse batch"""
+        for record in self:
+            record.voorraad_koek += 30
+            record.aankoopdatum_koek = fields.Date.today()
+            record.vervaldatum_koek = fields.Date.today() + timedelta(days=30)
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': '🍪 Verse batch gemaakt!',
+                'type': 'rainbow_man',
+            }
+        }
+    
+    def action_mark_populair(self):
+        """Markeer als populair"""
+        populair_tag = self.env['bakker_koeken_tags'].search([('name', '=', 'Populair')], limit=1)
+        for record in self:
+            if populair_tag:
+                record.tags_ids = [(4, populair_tag.id)]
+        return True
+    
+    def action_seizoen_special(self):
+        """Markeer als seizoensspecial"""
+        seizoen_tag = self.env['bakker_koeken_tags'].search([('name', '=', 'Seizoen')], limit=1)
+        for record in self:
+            if seizoen_tag:
+                record.tags_ids = [(4, seizoen_tag.id)]
+            record.prijs_koek = record.prijs_koek * 1.15  # 15% prijsverhoging
+        return True
+    
+    def action_kwaliteitscontrole(self):
+        """Doe kwaliteitscontrole"""
+        import random
+        for record in self:
+            if random.choice([True, False]):  # 50% kans
+                # Voeg "vers" tag toe
+                vers_tag = self.env['bakker_koeken_tags'].search([('name', '=', 'Vers')], limit=1)
+                if vers_tag:
+                    record.tags_ids = [(4, vers_tag.id)]
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': '✅ Kwaliteitscontrole Voltooid',
+                'message': 'Kwaliteit gecontroleerd en goedgekeurd!',
+                'type': 'info',
+            }
+        }
+    
+    def action_view_low_stock(self):
+        """Toon koeken met lage voorraad"""
+        action = self.env.ref('Bakker.bakker_koeken_action').read()[0]
+        action['domain'] = [('voorraad_koek', '<=', 10)]
+        action['context'] = {'search_default_filter_voorraad_laag': 1}
+        return action
+    
+    def action_verkoop_rapport(self):
+        """Genereer verkoop rapport"""
+        return {
+            'name': 'Verkoop Rapport',
+            'type': 'ir.actions.act_window',
+            'res_model': 'bakker_koeken',
+            'view_mode': 'pivot,graph',
+            'domain': [('id', 'in', self.ids)],
+            'context': {
+                'group_by': ['categorie_koek_id'],
+            }
+        }

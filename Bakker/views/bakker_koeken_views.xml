@@ -6,15 +6,22 @@
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <search string="Bakker Koeken">
-                <field name="name_koek"/>
-                <field name="categorie_koek_id"/>
-                <filter string="Chocolade" name="filter_chocolade" domain="[('categorie_koek_id.name', 'ilike', 'chocolade')]"/>
-                <filter string="Fruit" name="filter_fruit" domain="[('categorie_koek_id.name', 'ilike', 'fruit')]"/>
-                <filter string="Noten" name="filter_noten" domain="[('categorie_koek_id.name', 'ilike', 'noten')]"/>
-                <filter string="Speculaas" name="filter_speculaas" domain="[('categorie_koek_id.name', 'ilike', 'speculaas')]"/>
-                <filter string="Pudding" name="filter_pudding" domain="[('pudding_koek', '=', True)]"/>
-                <filter string="Bijna op" name="filter_voorraad_laag" domain="[('voorraad_koek', '&lt;=', 10)]"/>
-                <filter string="vervald" name="filter_vervaldatum" domain="[('vervaldatum_koek', '&lt;', context_today())]"/>
+                <field name="name_koek" />
+                <field name="categorie_koek_id" />
+                <filter string="Chocolade" name="filter_chocolade"
+                    domain="[('categorie_koek_id.name', 'ilike', 'chocolade')]" />
+                <filter string="Fruit" name="filter_fruit"
+                    domain="[('categorie_koek_id.name', 'ilike', 'fruit')]" />
+                <filter string="Noten" name="filter_noten"
+                    domain="[('categorie_koek_id.name', 'ilike', 'noten')]" />
+                <filter string="Speculaas" name="filter_speculaas"
+                    domain="[('categorie_koek_id.name', 'ilike', 'speculaas')]" />
+                <filter string="Pudding" name="filter_pudding"
+                    domain="[('pudding_koek', '=', True)]" />
+                <filter string="Bijna op" name="filter_voorraad_laag"
+                    domain="[('voorraad_koek', '&lt;=', 10)]" />
+                <filter string="vervald" name="filter_vervaldatum"
+                    domain="[('vervaldatum_koek', '&lt;', context_today())]" />
             </search>
         </field>
     </record>
@@ -24,7 +31,7 @@
         <field name="name">Bakker Koeken</field>
         <field name="res_model">bakker_koeken</field>
         <field name="view_mode">list,form</field>
-        <field name="search_view_id" ref="view_bakker_koeken_search"/>
+        <field name="search_view_id" ref="view_bakker_koeken_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create the first Bakker Koeken
@@ -34,7 +41,7 @@
 
     <!-- Menu items -->
     <menuitem id="bakker_menu_root" name="Bakker" sequence="10">
-        <menuitem id="bakker_menu_koeken" name="Koeken" action="bakker_koeken_action"/>
+        <menuitem id="bakker_menu_koeken" name="Koeken" action="bakker_koeken_action" />
     </menuitem>
 
     <!-- List view -->
@@ -43,14 +50,14 @@
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <list string="Bakker Koeken">
-                <field name="name_koek"/>
-                <field name="prijs_koek"/>
-                <field name="voorraad_koek"/>
-                <field name="aankoopdatum_koek"/>
-                <field name="vervaldatum_koek"/>
-                <field name="categorie_koek_id"/>
-                <field name="pudding_koek"/>
-                <field name="totaal_inventarisatie"/>
+                <field name="name_koek" />
+                <field name="prijs_koek" />
+                <field name="voorraad_koek" />
+                <field name="aankoopdatum_koek" />
+                <field name="vervaldatum_koek" />
+                <field name="categorie_koek_id" />
+                <field name="pudding_koek" />
+                <field name="totaal_inventarisatie" />
                 <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
             </list>
         </field>
@@ -62,17 +69,37 @@
         <field name="model">bakker_koeken</field>
         <field name="arch" type="xml">
             <form string="Bakker Koeken">
+                <header>
+                    <button name="action_voorraad_bijvullen" type="object"
+                        string="📦 Voorraad Bijvullen" class="btn-success" />
+                    <button name="action_verse_batch" type="object"
+                        string="🆕 Verse Batch" class="btn-primary" />
+                    <button name="action_uitverkocht" type="object"
+                        string="❌ Uitverkocht" class="btn-danger"
+                        confirm="Weet je zeker dat je dit als uitverkocht wilt markeren?" />
+                    <button name="action_korting_10_procent" type="object"
+                        string="💸 10% Korting" class="btn-warning" />
+                    <button name="action_happy_hour" type="object"
+                        string="🎉 Happy Hour" class="btn-info" />
+                    <button name="action_prijs_verhogen" type="object"
+                        string="📈 Prijs Verhogen" class="btn-warning" />
+                    <button name="action_mark_populair" type="object"
+                        string="⭐ Mark Populair" class="btn-secondary" />
+                    <button name="action_kwaliteitscontrole" type="object"
+                        string="✅ Kwaliteitscontrole" class="btn-light" />
+                </header>
                 <sheet>
                     <group>
-                        <field name="name_koek"/>
-                        <field name="prijs_koek"/>
-                        <field name="voorraad_koek"/>
-                        <field name="aankoopdatum_koek"/>
-                        <field name="vervaldatum_koek"/>
-                        <field name="categorie_koek_id"/>
-                        <field name="pudding_koek"/>
-                        <field name="totaal_inventarisatie"/>
-                        <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        <field name="name_koek" />
+                        <field name="prijs_koek" />
+                        <field name="voorraad_koek" />
+                        <field name="aankoopdatum_koek" />
+                        <field name="vervaldatum_koek" />
+                        <field name="categorie_koek_id" />
+                        <field name="pudding_koek" />
+                        <field name="totaal_inventarisatie" />
+                        <field name="tags_ids" widget="many2many_tags"
+                            options="{'color_field': 'color'}" />
                     </group>
                 </sheet>
             </form>
