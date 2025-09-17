@@ -66,15 +66,30 @@ class BakkerKoeken(models.Model):
         return True
     
     def action_verse_batch(self):
-        """Maak nieuwe verse batch"""
+        """Maak nieuwe verse batch - duplicate record"""
         for record in self:
-            record.voorraad_koek += 30
-            record.aankoopdatum_koek = fields.Date.today()
-            record.vervaldatum_koek = fields.Date.today() + timedelta(days=30)
+            # Maak een kopie van het huidige record
+            new_batch = record.copy({
+                'voorraad_koek': 30,
+                'aankoopdatum_koek': fields.Date.today(),
+                'vervaldatum_koek': fields.Date.today() + timedelta(days=30),
+                'name_koek': f"{record.name_koek} - Verse Batch",
+            })
+            
+            vers_tag = self.env['bakker_koeken_tags'].search([('name', '=', 'Vers')], limit=1)
+            if vers_tag:
+                new_batch.tags_ids = [(4, vers_tag.id)]
+        
         return {
+            'type': 'ir.actions.act_window',
+            'name': 'Nieuwe Verse Batch',
+            'res_model': 'bakker_koeken',
+            'res_id': new_batch.id,
+            'view_mode': 'form',
+            'target': 'current',
             'effect': {
                 'fadeout': 'slow',
-                'message': '🍪 Verse batch gemaakt!',
+                'message': '🍪 Verse batch aangemaakt!',
                 'type': 'rainbow_man',
             }
         }
@@ -101,7 +116,7 @@ class BakkerKoeken(models.Model):
         import random
         for record in self:
             if random.choice([True, False]):  # 50% kans
-                # Voeg "vers" tag toe
+                
                 vers_tag = self.env['bakker_koeken_tags'].search([('name', '=', 'Vers')], limit=1)
                 if vers_tag:
                     record.tags_ids = [(4, vers_tag.id)]

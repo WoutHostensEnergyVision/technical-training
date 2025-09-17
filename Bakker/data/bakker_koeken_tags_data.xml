@@ -61,5 +61,9 @@
             <field name="name">Zacht</field>
             <field name="color">0</field>
         </record>
+        <record id="tag_vers" model="bakker_koeken_tags">
+            <field name="name">Vers</field>
+            <field name="color">6</field>
+        </record>
     </data>
 </odoo>
