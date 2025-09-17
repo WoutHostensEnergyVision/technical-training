@@ -145,7 +145,7 @@ class BakkerKoeken(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'bakker_koeken',
             'view_mode': 'pivot,graph',
-            'domain': [('id', 'in', self.ids)],
+            # 'domain': [('id', 'in', self.ids)],
             'context': {
                 'group_by': ['categorie_koek_id'],
             }
